@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - rules.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - 'your-ip:9093'
+
+scrape_configs:
+  - job_name: bookify
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+        # MacOS -> IP, Windows and Linux -> localhost
+        - 'your-ip:8081'
